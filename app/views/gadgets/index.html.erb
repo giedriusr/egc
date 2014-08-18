@@ -1,2 +1,17 @@
-<h1>Gadgets#index</h1>
-<p>Find me in app/views/gadgets/index.html.erb</p>
+<h1>Gadgets</h1>
+
+<p>
+  <%= link_to 'Add new', new_gadget_path %>
+</p>
+
+<% @gadgets.each do |gadget| %>
+  <div class="alert">
+    <p>
+      Name: <%= gadget.name %>
+    </p>
+
+    <p>
+      <%= gadget.description %>
+    </p>
+  </div>
+<% end %>
