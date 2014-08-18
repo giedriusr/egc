@@ -12,6 +12,11 @@ RSpec.describe GadgetsController, type: :controller do
       .to route_to(controller: 'gadgets', action: 'new')
     end
 
+    it 'routes /gadgets to #create' do
+      expect(post: '/gadgets')
+      .to route_to(controller: 'gadgets', action: 'create')
+    end
+
     it 'routes /gadgets/1/edit to #edit' do
       expect(get: '/gadgets/1/edit')
       .to route_to(controller: 'gadgets', action: 'edit', id: '1')
@@ -51,6 +56,28 @@ RSpec.describe GadgetsController, type: :controller do
     end
     it 'should be new Gadget object' do
       expect(assigns(:gadget)).to be_a_new(Gadget)
+    end
+  end
+
+  describe 'POST create' do
+    before do
+      post 'create', gadget: { name: 'gadget', description: 'cool gadget' }
+    end
+
+    it 'should create new gadget' do
+      expect(Gadget.count).to eq(1)
+    end
+    it 'has given name' do
+      expect(Gadget.first.name).to eq('gadget')
+    end
+    it 'has given description' do
+      expect(Gadget.first.description).to eq('cool gadget')
+    end
+    it 'redirects to index' do
+      expect(response).to redirect_to gadgets_path
+    end
+    it 'throws flash success message' do
+      expect(flash[:success]).to eq('Saved')
     end
   end
 
