@@ -46,7 +46,7 @@ class GadgetsController < ApplicationController
   private
 
   def set_gadget
-    @gadget = Gadget.find(params[:id])
+    @gadget = Gadget.find_by(id: params[:id], user_id: current_user.id)
   end
 
   def gadget_params
