@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     get '/sign_up', to: 'devise/registrations#new', as: 'sign_up'
     get '/reset_password', to: 'devise/passwords#new', as: 'reset_password'
   end
+
+  resources :gadgets
 end
