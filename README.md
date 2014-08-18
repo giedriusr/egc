@@ -12,3 +12,10 @@ For testing I strongly recommend using rspec and either cucumber or rspec reques
 Bonus: Use TDD (should be visible in the git log).
 
 The implementation should be DRY, restful and well-tested - please keep the code minimal and avoid from using scaffolds.
+
+### Install
+`$ rake db:create`
+`$ rake db:migrate`
+
+### Specs
+`$ bundle exec rspec`
