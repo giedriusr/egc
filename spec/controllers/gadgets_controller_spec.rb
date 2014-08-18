@@ -38,6 +38,11 @@ RSpec.describe GadgetsController, type: :controller do
     end
   end
 
+  before do
+    @user = create(:user)
+    sign_in :user, @user
+  end
+
   describe 'GET index' do
     before do
       @gadget = create(:gadget)

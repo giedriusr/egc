@@ -1,4 +1,5 @@
 class GadgetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_gadget, only: [:edit, :update, :destroy, :show]
 
   def index
