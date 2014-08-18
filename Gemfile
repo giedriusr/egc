@@ -10,3 +10,31 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'rspec'
+  gem 'factory_girl_rails'
+  gem 'rb-fsevent', '~> 0.9.3'
+  gem 'rubocop'
+  gem 'brakeman'
+  gem 'bullet'
+  gem 'rails_best_practices'
+end
+
+group :development do
+  gem 'letter_opener'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  gem 'pry-rails'
+  gem 'awesome_print'
+end
+
+group :test do
+  gem 'launchy'
+  gem 'guard-rspec'
+  gem 'fakeweb'
+end
