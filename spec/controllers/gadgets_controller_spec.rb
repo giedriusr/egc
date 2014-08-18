@@ -31,6 +31,11 @@ RSpec.describe GadgetsController, type: :controller do
       expect(get: '/gadgets/1')
       .to route_to(controller: 'gadgets', action: 'show', id: '1')
     end
+
+    it 'routes /gadgets/1 to #destroy' do
+      expect(delete: '/gadgets/1')
+      .to route_to(controller: 'gadgets', action: 'destroy', id: '1')
+    end
   end
 
   describe 'GET index' do
@@ -130,6 +135,25 @@ RSpec.describe GadgetsController, type: :controller do
     end
     it 'renders the show template' do
       expect(response).to render_template('show')
+    end
+  end
+
+  describe 'DELETE destroy' do
+    before do
+      @gadget = create(:gadget)
+      expect(Gadget.count).to eq(1)
+
+      delete 'destroy', id: @gadget
+    end
+
+    it 'deletes a record' do
+      expect(Gadget.count).to eq(0)
+    end
+    it 'redirect to index' do
+      expect(response).to redirect_to gadgets_path
+    end
+    it 'throws success message' do
+      expect(flash[:success]).to eq('Deleted')
     end
   end
 end
