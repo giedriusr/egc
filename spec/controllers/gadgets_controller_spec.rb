@@ -101,7 +101,7 @@ RSpec.describe GadgetsController, type: :controller do
 
   describe 'GET edit' do
     before do
-      @gadget = create(:gadget)
+      @gadget = create(:gadget, user: @user)
       get :edit, id: @gadget
     end
 
@@ -118,7 +118,7 @@ RSpec.describe GadgetsController, type: :controller do
 
   describe 'PUT update' do
     before do
-      @gadget = create(:gadget)
+      @gadget = create(:gadget, user: @user)
       put 'update', id: @gadget, gadget: { name: 'new name', description: 'updated' }
     end
 
@@ -137,7 +137,7 @@ RSpec.describe GadgetsController, type: :controller do
 
   describe 'GET show' do
     before do
-      @gadget = create(:gadget)
+      @gadget = create(:gadget, user: @user)
       get :show, id: @gadget
     end
 
@@ -154,7 +154,7 @@ RSpec.describe GadgetsController, type: :controller do
 
   describe 'DELETE destroy' do
     before do
-      @gadget = create(:gadget)
+      @gadget = create(:gadget, user: @user)
       expect(Gadget.count).to eq(1)
 
       delete 'destroy', id: @gadget
