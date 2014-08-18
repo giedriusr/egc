@@ -88,6 +88,9 @@ RSpec.describe GadgetsController, type: :controller do
     it 'has given description' do
       expect(Gadget.first.description).to eq('cool gadget')
     end
+    it 'belongs to signed_in user' do
+      expect(Gadget.first.user.email).to eq(@user.email)
+    end
     it 'redirects to index' do
       expect(response).to redirect_to gadgets_path
     end
