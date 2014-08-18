@@ -11,7 +11,7 @@ class GadgetsController < ApplicationController
   end
 
   def create
-    @gadget = Gadget.new
+    @gadget = Gadget.new(user_id: current_user.id)
 
     if @gadget.update_attributes(gadget_params)
       flash[:success] = 'Saved'
