@@ -1,4 +1,6 @@
 class GadgetsController < ApplicationController
+  before_action :set_gadget, only: [:edit, :update]
+
   def index
     @gadgets = Gadget.order('created_at DESC')
   end
@@ -19,13 +21,25 @@ class GadgetsController < ApplicationController
   end
 
   def edit
-    @gadget = Gadget.find(params[:id])
+  end
+
+  def update
+    if @gadget.update_attributes(gadget_params)
+      flash[:success] = 'Updated'
+      redirect_to edit_gadget_path(@gadget)
+    else
+      render :edit
+    end
   end
 
   def show
   end
 
   private
+
+  def set_gadget
+    @gadget = Gadget.find(params[:id])
+  end
 
   def gadget_params
     params.require(:gadget).permit(:name, :description)
