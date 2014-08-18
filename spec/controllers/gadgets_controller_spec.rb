@@ -134,7 +134,12 @@ RSpec.describe GadgetsController, type: :controller do
   describe 'PUT update' do
     before do
       @gadget = create(:gadget, user: @user)
-      put 'update', id: @gadget, gadget: { name: 'new name', description: 'updated' }
+      put 'update',
+          id: @gadget,
+          gadget: {
+            name: 'new name',
+            description: 'updated'
+          }
     end
 
     it 'updates gadget' do
