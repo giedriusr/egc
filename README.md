@@ -15,6 +15,7 @@ The implementation should be DRY, restful and well-tested - please keep the code
 
 ### Install
 `$ rake db:create`
+
 `$ rake db:migrate`
 
 ### Specs
