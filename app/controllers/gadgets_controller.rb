@@ -18,6 +18,13 @@ class GadgetsController < ApplicationController
     @gadget = Gadget.new(user_id: current_user.id)
 
     if @gadget.update_attributes(gadget_params)
+      if params[:images]
+        @gadget = Gadget.find(@gadget)
+        params[:images].each do |image|
+          @gadget.photos.create(image: image)
+        end
+      end
+
       flash[:success] = 'Saved'
       redirect_to gadgets_path
     else

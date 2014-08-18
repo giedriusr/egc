@@ -15,15 +15,24 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Image</th>
+    <th width="200px">Image</th>
     <th>Name</th>
     <th>Description</th>
+    <th>Action</th>
   </tr>
   <% @gadgets.each do |gadget| %>
       <tr>
-        <td>{placeholder}</td>
+        <td>
+          <% gadget.photos.each do |photo| %>
+            <%= image_tag photo.image_url(:thumb).to_s %>
+          <% end %>
+        </td>
         <td><%= gadget.name %></td>
         <td><%= gadget.description %></td>
+        <td>
+          <%= link_to 'Edit', edit_gadget_path(gadget) %>
+          <%= link_to 'Delete', gadget_path(gadget), method: :delete %>
+        </td>
       </tr>
   <% end %>
   <% unless @gadgets.present? %>
