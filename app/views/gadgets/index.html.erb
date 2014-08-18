@@ -4,6 +4,12 @@
   <%= link_to 'Add new', new_gadget_path %>
 </p>
 
+<%= form_tag gadgets_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'search by name or description' %>
+  <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+  <%= link_to 'Show all', gadgets_path %>
+<% end %>
+
 <% @gadgets.each do |gadget| %>
   <div class="alert">
     <p>

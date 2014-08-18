@@ -3,7 +3,11 @@ class GadgetsController < ApplicationController
   before_action :set_gadget, only: [:edit, :update, :destroy, :show]
 
   def index
-    @gadgets = Gadget.order('created_at DESC')
+    @gadgets = current_user.gadgets
+
+    if params[:search]
+      @gadgets = @gadgets.search_by_name_or_description(params[:search])
+    end
   end
 
   def new
