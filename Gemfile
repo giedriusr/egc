@@ -13,6 +13,7 @@ gem 'spring', group: :development
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'carrierwave'
+gem 'rmagick', require: false
 
 group :development, :test do
   gem 'rspec-rails'
