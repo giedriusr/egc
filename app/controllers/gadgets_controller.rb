@@ -18,12 +18,7 @@ class GadgetsController < ApplicationController
     @gadget = Gadget.new(user_id: current_user.id)
 
     if @gadget.update_attributes(gadget_params)
-      if params[:images]
-        @gadget = Gadget.find(@gadget)
-        params[:images].each do |image|
-          @gadget.photos.create(image: image)
-        end
-      end
+      handle_images_upload
 
       flash[:success] = 'Saved'
       redirect_to gadgets_path
@@ -37,6 +32,8 @@ class GadgetsController < ApplicationController
 
   def update
     if @gadget.update_attributes(gadget_params)
+      handle_images_upload
+
       flash[:success] = 'Updated'
       redirect_to edit_gadget_path(@gadget)
     else
@@ -55,6 +52,14 @@ class GadgetsController < ApplicationController
   end
 
   private
+
+  def handle_images_upload
+    if params[:images]
+      params[:images].each do |image|
+        @gadget.photos.create(image: image)
+      end
+    end
+  end
 
   def set_gadget
     @gadget = Gadget.find_by(id: params[:id], user_id: current_user.id)
