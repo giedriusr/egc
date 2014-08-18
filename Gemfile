@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 gem 'devise'
 gem 'twitter-bootstrap-rails'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'rspec-rails'
