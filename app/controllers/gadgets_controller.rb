@@ -1,5 +1,5 @@
 class GadgetsController < ApplicationController
-  before_action :set_gadget, only: [:edit, :update]
+  before_action :set_gadget, only: [:edit, :update, :destroy]
 
   def index
     @gadgets = Gadget.order('created_at DESC')
@@ -33,6 +33,13 @@ class GadgetsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @gadget.destroy
+
+    flash[:success] = 'Deleted'
+    redirect_to gadgets_path
   end
 
   private
