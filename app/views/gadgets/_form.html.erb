@@ -1,0 +1,20 @@
+<%= form_for @gadget do |f| %>
+  <table class="table table-striped">
+    <tr>
+      <td><%= f.label :name %></td>
+      <td><%= f.text_field :name, class: 'input-xxlarge' %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :description %></td>
+      <td><%= f.text_area :description, class: 'input-xxlarge', rows: 5 %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <%= f.submit 'Save', class: 'btn btn-success' %>
+      </p>
+    </tr>
+  </table>
+<% end %>
+
+<%= link_to 'Back to list', gadgets_path %>

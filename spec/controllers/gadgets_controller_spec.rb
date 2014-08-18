@@ -49,16 +49,25 @@ RSpec.describe GadgetsController, type: :controller do
     it 'renders the new template' do
       expect(response).to render_template('new')
     end
+    it 'should be new Gadget object' do
+      expect(assigns(:gadget)).to be_a_new(Gadget)
+    end
   end
 
   describe 'GET edit' do
-    before { get :edit, id: 1 }
+    before do
+      @gadget = create(:gadget)
+      get :edit, id: @gadget
+    end
 
     it 'returns http success' do
       expect(response).to be_success
     end
     it 'renders the edit template' do
       expect(response).to render_template('edit')
+    end
+    it 'should not be new Gadget object' do
+      expect(assigns(:gadget)).not_to be_a_new(Gadget)
     end
   end
 
