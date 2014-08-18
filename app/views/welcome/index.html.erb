@@ -1,2 +1,8 @@
 <h1>Welcome to Electronic Gadgets Collection</h1>
 <p>Once signed up, you can have your own gadgets online!</p>
+
+<% if user_signed_in? %>
+  <%= link_to 'Sign out', sign_out_path, method: :delete %>
+<% else %>
+  <%= link_to 'Sign up', sign_up_path %> or <%= link_to 'Sign in', sign_in_path %>
+<% end %>
