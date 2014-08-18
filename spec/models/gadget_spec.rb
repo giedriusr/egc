@@ -7,4 +7,12 @@ RSpec.describe Gadget, type: :model do
       expect(gadget.user.email).to eq('test@email.com')
     end
   end
+
+  describe '#search_by_name_or_description' do
+    it 'finds by name' do
+      create(:gadget, name: 'coolest gadget')
+      gadgets = Gadget.search_by_name_or_description('cool')
+      expect(gadgets.count).to eq(1)
+    end
+  end
 end

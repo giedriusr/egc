@@ -44,19 +44,34 @@ RSpec.describe GadgetsController, type: :controller do
   end
 
   describe 'GET index' do
-    before do
-      @gadget = create(:gadget)
-      get :index
+    context 'when no search activated' do
+      before do
+        @gadget = create(:gadget, user: @user)
+        get :index
+      end
+
+      it 'returns http success' do
+        expect(response).to be_success
+      end
+      it 'renders the index template' do
+        expect(response).to render_template('index')
+      end
+      it 'assigns gadgets to the view' do
+        expect(assigns(:gadgets)).to eq([@gadget])
+      end
     end
 
-    it 'returns http success' do
-      expect(response).to be_success
-    end
-    it 'renders the index template' do
-      expect(response).to render_template('index')
-    end
-    it 'assigns gadgets to the view' do
-      expect(assigns(:gadgets)).to eq([@gadget])
+    context 'when search is activated' do
+      before do
+        @gadget = create(:gadget, name: 'black gadget', user: @user)
+        create(:gadget, name: 'yellow gad', user: @user)
+
+        get :index, search: 'bla'
+      end
+
+      it 'assigns gadget by search keyword' do
+        expect(assigns(:gadgets)).to eq([@gadget])
+      end
     end
   end
 
