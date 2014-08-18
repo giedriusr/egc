@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Egc</title>
+  <title>Electronic Gadgets Collection</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% flash.each do |name, msg| %>
+    <p class="alert alert-<%= name %>"><%= msg %></p>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
