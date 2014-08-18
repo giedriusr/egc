@@ -50,7 +50,7 @@ RSpec.describe GadgetsController, type: :controller do
     it 'renders the index template' do
       expect(response).to render_template('index')
     end
-    it 'should assign gadgets to the view' do
+    it 'assigns gadgets to the view' do
       expect(assigns(:gadgets)).to eq([@gadget])
     end
   end
@@ -74,7 +74,7 @@ RSpec.describe GadgetsController, type: :controller do
       post 'create', gadget: { name: 'gadget', description: 'cool gadget' }
     end
 
-    it 'should create new gadget' do
+    it 'creates new gadget' do
       expect(Gadget.count).to eq(1)
     end
     it 'has given name' do
@@ -128,13 +128,19 @@ RSpec.describe GadgetsController, type: :controller do
   end
 
   describe 'GET show' do
-    before { get :show, id: 1 }
+    before do
+      @gadget = create(:gadget)
+      get :show, id: @gadget
+    end
 
     it 'returns http success' do
       expect(response).to be_success
     end
     it 'renders the show template' do
       expect(response).to render_template('show')
+    end
+    it 'assigns gadget to the view' do
+      expect(assigns(:gadget)).to eq(@gadget)
     end
   end
 

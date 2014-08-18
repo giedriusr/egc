@@ -1,5 +1,5 @@
 class GadgetsController < ApplicationController
-  before_action :set_gadget, only: [:edit, :update, :destroy]
+  before_action :set_gadget, only: [:edit, :update, :destroy, :show]
 
   def index
     @gadgets = Gadget.order('created_at DESC')
