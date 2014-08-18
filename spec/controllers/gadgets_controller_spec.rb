@@ -22,6 +22,11 @@ RSpec.describe GadgetsController, type: :controller do
       .to route_to(controller: 'gadgets', action: 'edit', id: '1')
     end
 
+    it 'routes /gadgets/1 to #update' do
+      expect(put: '/gadgets/1')
+      .to route_to(controller: 'gadgets', action: 'update', id: '1')
+    end
+
     it 'routes /gadgets/1 to #show' do
       expect(get: '/gadgets/1')
       .to route_to(controller: 'gadgets', action: 'show', id: '1')
@@ -95,6 +100,25 @@ RSpec.describe GadgetsController, type: :controller do
     end
     it 'should not be new Gadget object' do
       expect(assigns(:gadget)).not_to be_a_new(Gadget)
+    end
+  end
+
+  describe 'PUT update' do
+    before do
+      @gadget = create(:gadget)
+      put 'update', id: @gadget, gadget: { name: 'new name', description: 'updated' }
+    end
+
+    it 'updates gadget' do
+      a = Gadget.find(@gadget)
+      expect(a.name).to eq('new name')
+      expect(a.description).to eq('updated')
+    end
+    it 'redirects to edit' do
+      expect(response).to redirect_to edit_gadget_path(@gadget)
+    end
+    it 'throws flash success message' do
+      expect(flash[:success]).to eq('Updated')
     end
   end
 
